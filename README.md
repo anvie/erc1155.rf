@@ -1,6 +1,6 @@
 # ERC-1155 Reframe Source
 
-This is [Reframe](https://github.com/ansvia/reframe) source to build ERC-1155 Solidity Smart Contract.
+This is [Reframe](https://github.com/ansvia/reframe) source to build ERC-1155 Solidity Smart Contract with [Brownie](https://github.com/eth-brownie/brownie).
 
 ## Usage
 
