@@ -1,0 +1,46 @@
+[reframe]
+name = "ERC1155"
+author = "anvie"
+min_version = "0.3.4"
+
+[project]
+name = "MyApp"
+version = "0.1.0"
+ignore_dirs = [
+    "target", "build"
+]
+
+finish_text = """Usage:
+
+    $ cd $name_kebab_case$
+
+Install prerequisites:
+
+    $ pip install -r requirements.txt
+
+Test:
+
+    $ brownie run scripts/test.py
+
+Deploy:
+
+    $ brownie run scripts/deploy.py
+"""
+
+[[param]]
+description = { ask = "Description ?", default = "My ERC-1155 Smart contract" }
+
+[[param]]
+author_name = { ask = "Author name?", default="Author" }
+
+[[param]]
+author_email = { ask = "Author email?", default="author@example.com" }
+
+[[param]]
+token_code = { ask = "Token code?", default="TOKN" }
+
+[[param]]
+max_supply = { ask = "Max supply? (Unit)", default="8000" }
+
+[[param]]
+base_metadata_url = { ask = "Base metadata URL?", default="https://ipfs.io/xxx" }

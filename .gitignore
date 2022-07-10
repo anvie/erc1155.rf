@@ -1,0 +1,8 @@
+__pycache__
+.history
+.hypothesis/
+build/
+reports/
+.env
+$name_pascal_case$Flattened.json
+
