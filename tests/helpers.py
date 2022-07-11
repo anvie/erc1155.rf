@@ -35,10 +35,10 @@ def solidity_keccak(abi_types, values, validity_check=False):
     return eth_utils.keccak(hexstr=hex_string)
 
 
-def get_mint_sig(sender, to, count, admin, nonce, airdrop=False):
-    m_hash = solidity_keccak(abi_types=["uint32", "address", "address", "uint32", "uint64", "bool"],
-                             values=[1, sender.address, to.address,
-                                     count, nonce, airdrop],
+def get_mint_sig(sender, itemId, count, nonce, admin):
+    m_hash = solidity_keccak(abi_types=["address", "uint16", "uint32", "uint64"],
+                             values=[sender.address, itemId,
+                                     count, nonce],
                              validity_check=True)
 
     msg_hash = defunct_hash_message(hexstr=m_hash.hex())
@@ -46,9 +46,9 @@ def get_mint_sig(sender, to, count, admin, nonce, airdrop=False):
     return (sig.r, sig.s, sig.v)
 
 
-def get_mint_sig_with_nonce(sender, to, count, admin, airdrop=False):
+def get_mint_sig_with_nonce(sender, itemId, count, admin):
     nonce = get_nonce()
-    sig = get_mint_sig(sender, to, count, admin, nonce, airdrop)
+    sig = get_mint_sig(sender, itemId, count, nonce, admin)
     return sig, nonce
 
 
