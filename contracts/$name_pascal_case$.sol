@@ -25,6 +25,7 @@ contract $name_pascal_case$ is ERC1155, Ownable, SigVerifier {
     mapping(uint16 => uint256) private _supplyFor;
 
     event Mint(uint256 indexed tokenId, address indexed owner);
+    event Burn(uint256 indexed tokenId, address indexed burner);
 
     constructor(address _owner, address _admin)
         ERC1155("$param.base_metadata_url$/{id}.json")
@@ -46,7 +47,12 @@ contract $name_pascal_case$ is ERC1155, Ownable, SigVerifier {
         return true;
     }
 
-    function mintWithSig(uint16 itemId, uint32 qty, uint64 nonce, Sig memory sig) external payable returns (bool) {
+    function mintWithSig(
+        uint16 itemId,
+        uint32 qty,
+        uint64 nonce,
+        Sig memory sig
+    ) external payable returns (bool) {
         require(_supplyFor[itemId] + qty <= MAX_SUPPLY, "Limit exceeded");
 
         require(nonce >= uint64(block.timestamp) / 30, "Invalid nonce");
@@ -70,5 +76,13 @@ contract $name_pascal_case$ is ERC1155, Ownable, SigVerifier {
      */
     function totalSupply(uint16 itemId) external view returns (uint256) {
         return _supplyFor[itemId];
-     }
+    }
+
+    function burn(uint16 itemId, uint256 amount) external {
+        uint256 _bal = balanceOf(_msgSender(), itemId);
+        require(_bal >= amount, "Not enough tokens");
+        _supplyFor[itemId] -= amount;
+        _burn(_msgSender(), itemId, amount);
+        emit Burn(itemId, _msgSender());
+    }
 }
