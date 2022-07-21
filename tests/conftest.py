@@ -11,15 +11,19 @@ def isolate(fn_isolation):
     pass
 
 @pytest.fixture(scope="module")
-def owner(accounts):
-    acc = accounts.add(config['wallets']['owner_key'])
+def root(accounts):
+    root_key = config['wallets']['root_key']
+    if not root_key:
+        return accounts[0]
+    acc = accounts.add(root_key)
     return acc
 
 @pytest.fixture(scope="module")
 def admin(accounts):
-    # acc = accounts.add(config['wallets']['admin_key'])
-    acc = accounts.add()
-    accounts[1].transfer(acc.address, '30 ethers')
+    admin_key = config['wallets']['admin_key']
+    if not admin_key:
+        return accounts[1]
+    acc = accounts.add(admin_key)
     return acc
 
 @pytest.fixture(scope="module")
