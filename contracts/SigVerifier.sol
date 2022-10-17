@@ -5,7 +5,7 @@ pragma solidity ^0.8.0;
 /**
  *
  * This code is part of $name_pascal_case$ project (https://$name_snake_case$.one).
- * Developed by Jagat Token (jagatoken.com).
+ * Developed by $param.author_name$ ($param.author_email_lower_case$)
  *
  */
 
