@@ -27,7 +27,7 @@ contract $name_pascal_case$ is ERC1155, Ownable, SigVerifier {
     event Mint(uint256 indexed tokenId, address indexed owner);
     event Burn(uint256 indexed tokenId, address indexed burner);
 
-    constructor(address _owner, address _admin)
+    constructor(address _admin)
         ERC1155("$param.base_metadata_url$/{id}.json")
     {
         admin = _admin;

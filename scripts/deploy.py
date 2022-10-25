@@ -15,7 +15,7 @@ def main():
     print("using owner key:", owner.address)
 
     # return $name_pascal_case$.deploy("https://$name_snake_case$.one/meta/", owner, admin, {'from': owner}, publish_source=True)
-    contract = $name_pascal_case$.deploy(BASE_URL, owner, admin, {'from': owner})
+    contract = $name_pascal_case$.deploy(BASE_URL, admin, {'from': owner})
     print("contract address:", contract.address)
 
     standard_json_input = $name_pascal_case$.get_verification_info()['standard_json_input']

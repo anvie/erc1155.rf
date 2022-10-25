@@ -28,5 +28,5 @@ def admin(accounts):
 
 @pytest.fixture(scope="module")
 def $name_snake_case$($name_pascal_case$, $name_pascal_case$Test, owner, admin):
-    _$name_snake_case$_contract = $name_pascal_case$.deploy(owner, admin, {'from': owner})
+    _$name_snake_case$_contract = $name_pascal_case$.deploy(admin, {'from': owner})
     return _$name_snake_case$_contract
