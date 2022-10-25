@@ -14,13 +14,12 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
+import "./HasAdmin.sol";
 import "./SigVerifier.sol";
 
-contract $name_pascal_case$ is ERC1155, Ownable, SigVerifier {
+contract $name_pascal_case$ is ERC1155, Ownable, HasAdmin, SigVerifier {
     uint256 public constant MAX_SUPPLY = $param.max_supply$;
     uint16 public constant ITEM1 = 1;
-
-    address public admin;
 
     mapping(uint16 => uint256) private _supplyFor;
 
@@ -30,11 +29,20 @@ contract $name_pascal_case$ is ERC1155, Ownable, SigVerifier {
     constructor(address _admin)
         ERC1155("$param.base_metadata_url$/{id}.json")
     {
-        admin = _admin;
+        _setAdmin(_admin);
     }
 
     function changeAdmin(address _newAdmin) external onlyOwner {
-        admin = _newAdmin;
+        _setAdmin(_newAdmin);
+    }
+
+    modifier onlyAdminOrOwner() {
+        require(_isAdmin(msg.sender) || _isOwner(msg.sender));
+        _;
+    }
+
+    function _isOwner(address account) internal view returns (bool) {
+        return owner() == account;
     }
 
     function mint(uint32 qty) external payable returns (bool) {
